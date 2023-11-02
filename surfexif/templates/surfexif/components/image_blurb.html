@@ -1,0 +1,57 @@
+<!-- This component consists of the box and content that holds each rendered image -->
+
+<div class="img_blurb" id="img-blurb-{{image.id}}" data-imageid="{{image.id}}">
+    
+    <!-- Render image filename, upload date, and thumbnail -->
+    <div>
+        <div>File: {{ image.filename }}</div>
+        <div>Uploaded: {{ image.timestamp }}</div>
+        <div>
+            <a href="{% url 'img_profile' image.id %}">
+                <img src="{{ image.imagepath.url }}" class="img_thumbnail" data-imageid="{{image.id}}">
+            </a>
+        </div>
+    </div>
+
+    <!-- If the image has any tags to render, render them -->
+    {% if image.tags_with_image.all %}
+
+        <!-- Button for showing and hiding the EXIF data table -->
+        <button type="button"
+            class="infotable_btn btn btn-primary btn-sm btn-block bg-success"
+            id="infotable-btn-{{image.id}}"
+            data-imageid="{{image.id}}"
+        >   
+            SHOW/HIDE INFO TABLE 
+        </button>
+        
+        <!-- Table containing all of the EXIF data for the current image  -->
+        <table class="img-infotable" id="img-infotable-{{image.id}}" data-imageid="{{image.id}}">
+            
+            <!-- Headers for the information table -->
+            <th>EXIF Tag</th>
+            <th></th>
+            <th>EXIF Val</th>
+
+            <!-- https://stackoverflow.com/questions/2111555/django-templates-changing-context-for-an-include-template -->
+
+            <!-- For each piece of EXIF data avai -->
+            {% for tag in image.tags_with_image.all|dictsort:"category.descriptor.lower" %}
+                <tr>
+                    <!-- URL-escaping technique learned from the resource below:
+                        https://docs.djangoproject.com/en/3.0/ref/templates/builtins/#urlencode 
+                    -->
+                    <td>{% include "surfexif/components/category_btn.html" with category=tag.category imageid=image.id %}</td>
+                    <td><span class="add_tag_btn" data-tagid="{{tag.id}}" data-tagname="{{tag.descriptor}}" data-tagcategory="{{tag.category}}"> ➕ </span></td>
+                    <td><a href="{% url 'imgs_w_tags' %}?t={{ tag.id|urlencode }}" data-tagid="{{tag.id}}" data-tagname="{{tag.descriptor}"}>
+                        {{tag.descriptor}}</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+
+    <!-- If image has no tags/EXIF data available, inform the user -->
+    {% else %}
+        <div>No EXIF data</div>
+    {% endif %}
+
+</div>

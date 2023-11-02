@@ -1,0 +1,29 @@
+{% extends "surfexif/layout.html" %}
+
+<!-- "login.html" was taken from the distribution code for the "Network" project 
+    (Project 4) of CSCI E-33A Fall 2020 : 
+    https://cs50.harvard.edu/extension/web/2020/fall/projects/4/network/ 
+-->
+
+{% block body %}
+
+    <h2>Login</h2>
+
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+
+    <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <input autofocus class="form-control" type="text" name="username" placeholder="Username">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="password" name="password" placeholder="Password">
+        </div>
+        <input class="btn btn-primary bg-success" type="submit" value="Login">
+    </form>
+
+    Don't have an account? <a href="{% url 'register' %}">Register here.</a>
+
+{% endblock %}

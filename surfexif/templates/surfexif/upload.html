@@ -1,0 +1,25 @@
+{% extends "surfexif/layout.html" %}
+
+{% block body %}
+    <!-- Page containing Django form for uploading a single image -->
+    <!-- 
+        Based on Django's documentation for file uploads:
+        https://docs.djangoproject.com/en/3.1/topics/http/file-uploads/
+
+        CSS button color changed using Boostrap documentation below:
+        https://getbootstrap.com/docs/4.0/utilities/colors/
+     -->
+     <div class="gallery-container">
+         <h5>App can only extract EXIF data from JPEG images</h5>
+        <form action="{% url 'upload' %}" enctype=multipart/form-data method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <div>
+                    {{ form.as_p }}
+                    <input class="btn btn-primary bg-success" type="submit" value="Upload Image">
+                </div>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

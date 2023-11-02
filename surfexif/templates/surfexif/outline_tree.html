@@ -1,0 +1,28 @@
+{% extends "surfexif/gallery.html" %}
+
+{% block body %}
+
+<!-- Generate the "Categories" page showing the outline of categories 
+    that the user's EXIF tags fall into.
+    User can click on each category button to see the tags that are under
+    that category.
+-->
+<div class="category-list-container">
+    <ul>
+
+    <!--
+        Syntax for sorting a Django variable object at the template level
+        was learned from the resource below: 
+        https://stackoverflow.com/questions/21511527/how-to-sort-a-list-of-objects-in-a-template-in-alphabetic-order 
+    -->
+    {% if categories %}
+        {% for category in categories|dictsort:"descriptor.lower" %}
+            <li>
+                {% include "surfexif/components/category_btn.html" with category=category imageid=imageid %}
+            </li>
+        {% endfor %}
+    {% endif %}
+    </ul>
+</div>
+
+{% endblock %}

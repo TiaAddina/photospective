@@ -1,0 +1,49 @@
+<!-- content in "global_navbar.html" was adapted from the distribution 
+    code for the "Network" project (Project 4) of CSCI E-33A Fall 2020 : 
+    https://cs50.harvard.edu/extension/web/2020/fall/projects/4/network/ 
+-->
+
+<!-- Mobile-Responsive Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand text-warning" href="{% url 'index' %}">Photospective</a> 
+    
+    <!-- Simple mobile-responsive navbar from Bootstrap:
+        https://getbootstrap.com/docs/4.0/components/navbar/
+    -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+
+            {% if user.is_authenticated %}
+            <!-- 
+                Links that are visible when a user is logged in
+            -->
+            <li class="nav-item">
+                <a class="nav-link" href="#"><strong>{{ user.username }}</strong></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'upload' %}">Upload Image</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'categories' %}">My Categories</a>
+            </li>
+            <li class="nav-item logout-btn">
+                <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+            </li>
+            {% else %}
+            <!-- 
+                Links that are visible when user is anonymous/logged out 
+            -->
+            <li class="nav-item login-btn">
+                <a class="nav-link" href="{% url 'login' %}">Log In</a>
+            </li>
+            <li class="nav-item register-btn">
+                <a class="nav-link" href="{% url 'register' %}">Register</a>
+            </li>
+            {% endif %}
+        </ul>
+        </div>
+
+    </nav>

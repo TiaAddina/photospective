@@ -1,0 +1,11 @@
+<!-- This component includes all of the tools needed by pages 
+    that contain images and clickable tags/categories -->
+    
+{% extends "surfexif/layout.html" %}
+
+<!-- Details of Django template inheritance reviewed from resource below:
+    https://overiq.com/django-1-10/template-inheritance-in-django/ 
+-->
+{% block gallerytools %}
+    {% include "surfexif/components/tags_bay.html" %}
+{% endblock %}

@@ -1,0 +1,89 @@
+/* Variable support for Vanilla CSS learned from resource below: 
+https://www.w3schools.com/css/css3_variables.asp */
+
+:root {
+    --bgdark: #50555a;
+    --white: #f8f9fa;
+    --green: #28a745;
+    --lightgreen: #76df8e;
+    --blue:     #5bc0de;
+    --gpad: 15px;
+    --gmarg: 15px;
+    --roundcorner: 12px;
+  }
+
+body {
+    color: var(--white);
+    background-color: var(--bgdark);
+}
+
+td {
+    border: solid var(--green) 1px;
+    word-break: break-all;
+}
+
+
+img, .btn, .img_blurb, .querybay-container {   
+    border-radius: var(--roundcorner);
+}
+
+.img_thumbnail {    max-width: 100% ;   }
+.img-infotable {    display: none;      }
+
+.querybay-container, .gallery-container, .img_blurb {
+    padding: var(--gpad);
+    margin: var(--gmarg) auto;
+}
+
+.querybay-container {
+    max-width: 100%;
+    border-color: var(--blue);
+}
+.querybay-container, .img_blurb {
+    border-style: solid;
+    border-width: 3px;
+}
+
+.gallery-container {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 15px;
+    max-width: 100%;
+}
+.img_blurb {
+    max-width: 500px;
+    height: auto ;
+    overflow: hidden;
+    display: flexbox;
+    border-color: var(--lightgreen);
+}
+
+
+/*  Reviewed how media queries are used from the resource below:
+    https://www.w3schools.com/css/css_rwd_mediaqueries.asp 
+*/
+@media only screen and (min-width: 600px) {
+    .img_blurb {
+      max-width: 380px;
+    }
+    .category-list-container{
+    max-width: 50%;
+    }
+  }
+
+.form-control {
+    max-width: 400px;
+}
+
+/*  I had trouble with Bootstraps blue-colored glow for input fields
+    clashing with the overall aesthetic of the site, so I used the resource
+    below to replace it with a standard, website-wide green
+    https://stackoverflow.com/questions/14820952/change-bootstrap-input-focus-blue-glow */
+.form-control:focus
+ {
+    border-color: var(--green);
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+
+a, a:hover               {   color: var(--white)   ;}
+.add_tag_btn    {   cursor: pointer            ;}

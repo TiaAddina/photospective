@@ -1,0 +1,12 @@
+<!-- Component for the category button that appears throughout the site -->
+<!-- This has been made into a seperate file for reusability -->
+<div class="category-tools" id="category-tools-{{category.id}}-{{imageid}}">
+    <button type="button"
+            class="category_btn btn btn-primary btn-sm btn-block bg-success"
+            data-categoryid="{{category.id}}"
+            data-categoryname="{{category.descriptor}}"
+            data-imageid="{{imageid}}"
+    >
+        {{category.descriptor}}
+    </button>
+</div>

@@ -1,0 +1,26 @@
+{% extends "surfexif/gallery.html" %}
+
+{% block body %}
+    
+    <!--
+         If there are any images to render, 
+        generate the image blurbs to display them on the web app
+    -->
+    {% if images %}
+    
+    <div class="gallery-container">
+        <!-- 
+            Iterate through images and generate image blurbs
+        -->
+        {% for image in images reversed %}
+            {% include "surfexif/components/image_blurb.html" with image=image %}
+        {% endfor %}
+    </div>
+    
+    <!-- 
+        If there are no images, inform the user
+     -->
+    {% else %}
+        <h4>No images matching query</h4>
+    {% endif %}
+{% endblock %}
